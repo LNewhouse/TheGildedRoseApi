@@ -16,13 +16,13 @@ namespace GildedRoseAPITest.Models
         public int ItemId { get; set; }
     }
 
-    public static class ItemHelperClass
+    public static class ItemExtensions
     {
         /// <summary>
         /// Builds the Gilded Rose's sample inventory
         /// </summary>
         /// <returns></returns>
-        public static List<Item> BuildInventory()
+        public static List<Item> BuildSampleInventory()
         {
             List<Item> inventory = new List<Item>();
 

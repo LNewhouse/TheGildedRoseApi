@@ -25,7 +25,7 @@ namespace TheGildedRoseApi.Models
         /// Builds the Gilded Rose's sample user list
         /// </summary>
         /// <returns></returns>
-        public static List<User> GenerateUsers()
+        public static List<User> GenerateSampleUsers()
         {
             List<User> usersList = new List<User>();
 

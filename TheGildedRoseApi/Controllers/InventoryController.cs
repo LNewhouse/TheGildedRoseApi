@@ -7,7 +7,7 @@ namespace TheGildedRoseApi.Controllers
     [Route("api/[controller]")]
     public class InventoryController : Controller
     {
-        private readonly List<Item> _gildedRoseInventory = ItemHelperClass.BuildInventory();
+        private readonly List<Item> _gildedRoseInventory = ItemExtensions.BuildSampleInventory();
 
         // GET: api/<controller>
         [HttpGet]
