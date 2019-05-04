@@ -12,13 +12,13 @@ namespace TheGildedRoseApi.Controllers
     [Route("api/[controller]")]
     public class InventoryController : Controller
     {
-        private List<Item> inventory = ItemHelperclass.BuildInventory();
+        private readonly List<Item> _gildedRoseInventory = ItemHelperclass.BuildInventory();
 
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<Item> Get()
         {
-            return inventory;
+            return _gildedRoseInventory;
         }
     }
 }
