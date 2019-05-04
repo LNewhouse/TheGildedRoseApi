@@ -13,6 +13,7 @@ namespace TheGildedRoseApi.Controllers
         [HttpGet]
         public IEnumerable<Item> Get()
         {
+            // Return all inventory items
             return _gildedRoseInventory;
         }
     }

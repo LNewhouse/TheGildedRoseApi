@@ -14,6 +14,8 @@ namespace TheGildedRoseApi.Models
 
         public int Quantity { get; set; }
 
+        public int ItemPrice { get; set; }
+
         public DateTime TransactionTime { get; set; }
     }
 
@@ -23,8 +25,9 @@ namespace TheGildedRoseApi.Models
         /// Validates the given transactions
         /// </summary>
         /// <param name="transaction"></param>
+        /// <param name="accountBalance"></param>
         /// <returns></returns>
-        public static bool ValidateTransaction(Transaction transaction)
+        public static bool ValidateTransaction(Transaction transaction, int accountBalance)
         {
             bool isValid = true;
 
@@ -39,6 +42,11 @@ namespace TheGildedRoseApi.Models
             }
 
             if (transaction.Quantity < 0 || transaction.Quantity == 0)
+            {
+                return false;
+            }
+
+            if (accountBalance - (transaction.Quantity * transaction.ItemPrice) < 0)
             {
                 return false;
             }

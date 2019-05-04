@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using GildedRoseAPITest.Models;
+using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using TheGildedRoseApi.Models;
 
@@ -12,24 +13,41 @@ namespace TheGildedRoseApi.Controllers
     {
         private List<User> _users = UserExtensions.GenerateSampleUsers();
         private List<Transaction> _transactions = TransactionExtensions.GenerateSampleTransactions();
-        private readonly List<Item> _gildedRoseInventory = ItemExtensions.BuildSampleInventory();
+
+        public TransactionController()
+        {
+            Users = _users;
+            Transactions = _transactions;
+        }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string username, string password)
+        public HttpStatusCode Post([FromBody]Transaction transaction)
         {
+            // Grab user that is associated with the transaction
+            User transactionUser = Users.First(u => u.UserId == transaction.UserId);
+
+            // Validate transaction
+            bool isValidTransaction = TransactionExtensions.ValidateTransaction(transaction, transactionUser.AccountBalance);
+
+            if (isValidTransaction)
+            {
+                // Decrement account balance in DB
+                transactionUser.AccountBalance = (transactionUser.AccountBalance - (transaction.Quantity * transaction.ItemPrice));
+
+                // Add transaction in DB
+                Transactions.Add(transaction);
+
+                // Return successful response
+                return HttpStatusCode.Accepted;
+            }
+
+            // Return failed response
+            return HttpStatusCode.Forbidden;
         }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        private List<User> Users { get;}
 
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        private List<Transaction> Transactions { get;}
     }
 }
