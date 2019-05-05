@@ -25,7 +25,7 @@ namespace TheGildedRoseApi.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost("{purchaseOrder}")]
+        [HttpPost]
         public HttpStatusCode Post([FromBody]PurchaseOrder purchaseOrder)
         {
             Transaction transaction = new Transaction
@@ -49,7 +49,7 @@ namespace TheGildedRoseApi.Controllers
                 // Decrement account balance in DB
                 transactionUser.AccountBalance = (transactionUser.AccountBalance - (transaction.PurchaseOrder.Quantity * itemPrice));
 
-                // Add transaction in DB
+                // Add transaction in DB | DB would increment the transactionID up
                 Transactions.Add(transaction);
 
                 // Return successful response
