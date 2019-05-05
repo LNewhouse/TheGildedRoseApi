@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GildedRoseAPITest.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TheGildedRoseApi.Controllers
@@ -10,7 +11,7 @@ namespace TheGildedRoseApi.Controllers
         private readonly List<Item> _gildedRoseInventory = ItemExtensions.BuildSampleInventory();
 
         // GET: api/<controller>
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public IEnumerable<Item> Get()
         {
             // Return all inventory items

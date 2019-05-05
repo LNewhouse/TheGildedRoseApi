@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using GildedRoseAPITest.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheGildedRoseApi.Models;
 
@@ -25,7 +26,7 @@ namespace TheGildedRoseApi.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
+        [HttpPost, Authorize ]
         public HttpStatusCode Post([FromBody]PurchaseOrder purchaseOrder)
         {
             Transaction transaction = new Transaction
