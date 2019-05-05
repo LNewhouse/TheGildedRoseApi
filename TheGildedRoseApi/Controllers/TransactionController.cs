@@ -18,29 +18,32 @@ namespace TheGildedRoseApi.Controllers
         private List<Transaction> _transactions = TransactionExtensions.GenerateSampleTransactions();
         private List<Item> _inventory = ItemExtensions.BuildSampleInventory();
 
-        public TransactionController()
-        {
-            Users = _users;
-            Transactions = _transactions;
-            Inventory = _inventory;
-        }
-
         // POST api/<controller>
-        [HttpPost, Authorize ]
+        [ HttpPost, Authorize ]
         public HttpStatusCode Post([FromBody]PurchaseOrder purchaseOrder)
         {
-            Transaction transaction = new Transaction
+            // Grab current users information
+            var currentUser = HttpContext.User;
+
+            Transaction transaction = new Transaction();
+
+            // Check to see if the user identity has been validated and snag UserId
+            if (currentUser.Claims.Any(c => c.Type == "UserId"))
             {
-                PurchaseOrder = purchaseOrder,
-                TransactionTime = DateTime.Now.ToUniversalTime(),
-                UserId = 1 //TODO Authenticated user here
-            };
+                transaction.PurchaseOrder = purchaseOrder;
+                transaction.TransactionTime = DateTime.Now.ToUniversalTime();
+                transaction.UserId = int.Parse(currentUser.Claims.First(i => i.Type == "UserId").Value);
+            }
+            else
+            {
+                return HttpStatusCode.Forbidden;
+            }
 
             // Grab user that is associated with the transaction
-            User transactionUser = Users.First(u => u.UserId == transaction.UserId);
+            User transactionUser = _users.First(u => u.UserId == transaction.UserId);
 
             // Grab the item price that is associated with the purchase item
-            int itemPrice = Inventory.First(i => i.ItemId == purchaseOrder.ItemId).Price;
+            int itemPrice = _inventory.First(i => i.ItemId == purchaseOrder.ItemId).Price;
 
             // Validate transaction
             bool isValidTransaction = TransactionExtensions.ValidateTransaction(transaction, transactionUser.AccountBalance, itemPrice);
@@ -51,7 +54,7 @@ namespace TheGildedRoseApi.Controllers
                 transactionUser.AccountBalance = (transactionUser.AccountBalance - (transaction.PurchaseOrder.Quantity * itemPrice));
 
                 // Add transaction in DB | DB would increment the transactionID up
-                Transactions.Add(transaction);
+                _transactions.Add(transaction);
 
                 // Return successful response
                 return HttpStatusCode.Accepted;
@@ -60,11 +63,5 @@ namespace TheGildedRoseApi.Controllers
             // Return failed response
             return HttpStatusCode.Forbidden;
         }
-
-        private List<User> Users { get;}
-
-        private List<Transaction> Transactions { get;}
-
-        private List<Item> Inventory { get; }
     }
 }

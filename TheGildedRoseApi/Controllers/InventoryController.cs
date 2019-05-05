@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TheGildedRoseApi.Controllers
 {
+    /// <summary>
+    /// API for receiving the inventory list
+    /// </summary>
     [Route("api/[controller]")]
     public class InventoryController : Controller
     {

@@ -25,7 +25,7 @@ namespace TheGildedRoseApi
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "Jwt:Issuer",
                         ValidAudience = "Jwt:Issuer",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jwt:Key"))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jwt:256KeyBitKeyForTestingPurposes"))
                     };
                 });
 
