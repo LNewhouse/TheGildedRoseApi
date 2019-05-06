@@ -20,10 +20,12 @@ A transaction can be performed by making a post call to the localhost/api/transa
 
 Questions
 ````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-1) How do we know if a user is authenticated?
+How do we know if a user is authenticated?
+
 We know the user is authenticated if they successfully pass in a JWT that has a UserId claim. This can only be obtained if they are succesfully vailidated by the LoginController. This LoginController matches the Username and Password passed in via Json object, and, if they exist, then we create a JWT and add the User's unique UserId as a claim. When the user then tries to purchase and item we then read the users JWT, and, if a UserId claim is found, we create a transaction based on the UserId and the purchase order that is passed in as a Json object.
 
-2) Is it always possible to buy an item?
+Is it always possible to buy an item?
+
 No it is not always possible to buy an item. The user must have succesfully logged in to have obtained a JWT. This JWT will expire in 30 minutes, and has a UserId claim that will be examined upon arriving at the TransactionController. If the token is expired or the UserId is not present we bail out and return a HttpStatusCode.Forbidden. Additionally the purchase can fail if the user does not have sufficient funds to cover the purchase order.
 ````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 
