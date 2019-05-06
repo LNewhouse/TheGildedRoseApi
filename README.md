@@ -2,7 +2,7 @@
 API Test for the folks at EP
 
 API Requirements (Tested using Postman)
-````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+
 1) Retrieve the current inventory (i.e. list of items)
 
 Can be obtained by making a get call to the localhost/api/inventory
@@ -16,10 +16,10 @@ Authentication can be performed by making a post call to the localhost/api/login
 A transaction can be performed by making a post call to the localhost/api/transaction with a json object containing the following
 { "ItemId" : 1, "Quantity" : 5 } //Creates a transaction if the UserId is passed back via JWT
 //Transaction is then validated and commited.
-````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+
 
 Questions
-````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+
 How do we know if a user is authenticated?
 
 We know the user is authenticated if they successfully pass in a JWT that has a UserId claim. 
@@ -35,7 +35,7 @@ No it is not always possible to buy an item. The user must have succesfully logg
 This JWT will expire in 30 minutes, and has a UserId claim that will be examined upon arriving at the TransactionController. 
 If the token is expired or the UserId is not present we bail out and return a HttpStatusCode.Forbidden. 
 Additionally the purchase can fail if the user does not have sufficient funds to cover the purchase order.
-````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+
 
 Deliverables Explanation
 Choice of data format and why JWT was the authentication method of choice
@@ -50,11 +50,11 @@ that only had the item to be purchased and its quantity. Since we require authen
 If the UserId portion of the JWT is present, then we know that it is a valid transaction. 
 As stated before, it was also chosen for the 256 bit encryption, but in the case of this api that may have been a bit overkill. 
 Primarily the JWT was chosen because it was lightweight easy to configure, and secure for the purposes of this test.
-````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 
-If I have been unclear at any time during this readme, please feel free to ask me questions. 
+
+If I have been unclear at any time during this readme, please feel free to ask me questions.
 This has been my first attempt at anything like this, so a bit of research was involved, and I have no doubt some of the methodologies 
-or implementations I have are a bit unrefined. I encourage any feedback any of you may have towards this programming challenge.
+or implementations I have are a bit unrefined (Would pull the authentication into its own class but for the purposes of this challenge it seemed unnecessary to bloat the project). I encourage any feedback any of you may have towards this programming challenge.
 
 Thanks for the challenge!
 -Latham
