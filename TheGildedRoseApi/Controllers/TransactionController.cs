@@ -14,12 +14,19 @@ namespace TheGildedRoseApi.Controllers
     [Route("api/[controller]")]
     public class TransactionController : Controller
     {
+        #region Attributes
+
         private List<User> _users = UserExtensions.GenerateSampleUsers();
         private List<Transaction> _transactions = TransactionExtensions.GenerateSampleTransactions();
         private List<Item> _inventory = ItemExtensions.BuildSampleInventory();
 
+        #endregion
+
+
+        #region Public Methods
+
         // POST api/<controller>
-        [ HttpPost, Authorize ]
+        [HttpPost, Authorize]
         public HttpStatusCode Post([FromBody]PurchaseOrder purchaseOrder)
         {
             // Grab current users information
@@ -63,5 +70,7 @@ namespace TheGildedRoseApi.Controllers
             // Return failed response
             return HttpStatusCode.Forbidden;
         }
+
+        #endregion
     }
 }

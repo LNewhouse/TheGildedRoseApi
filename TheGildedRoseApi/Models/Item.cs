@@ -7,17 +7,23 @@ namespace GildedRoseAPITest.Models
     /// </summary>
     public class Item
     {
-        public string Name { get; set; }
+        #region Properties
 
         public string Description { get; set; }
 
+        public int ItemId { get; set; }
+
+        public string Name { get; set; }
+
         public int Price { get; set; }
 
-        public int ItemId { get; set; }
+        #endregion
     }
 
     public static class ItemExtensions
     {
+        #region Public Methods
+
         /// <summary>
         /// Builds the Gilded Rose's sample inventory
         /// </summary>
@@ -40,5 +46,7 @@ namespace GildedRoseAPITest.Models
 
             return inventory;
         }
+
+        #endregion
     }
 }

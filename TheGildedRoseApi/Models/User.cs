@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TheGildedRoseApi.Models
 {
@@ -10,15 +7,21 @@ namespace TheGildedRoseApi.Models
     /// </summary>
     public class User
     {
+        #region Properties
+
+        public int AccountBalance { get; set; }
+
         public int UserId { get; set; }
 
         public UserLogin UserLogin { get; set; }
 
-        public int AccountBalance { get; set; }
+        #endregion
     }
 
     public static class UserExtensions
     {
+        #region Public Properties
+
         /// <summary>
         /// Builds the Gilded Rose's sample user list
         /// </summary>
@@ -39,5 +42,7 @@ namespace TheGildedRoseApi.Models
 
             return usersList;
         }
+
+        #endregion
     }
 }

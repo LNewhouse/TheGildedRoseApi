@@ -11,7 +11,14 @@ namespace TheGildedRoseApi.Controllers
     [Route("api/[controller]")]
     public class InventoryController : Controller
     {
+        #region Attributes
+
         private readonly List<Item> _gildedRoseInventory = ItemExtensions.BuildSampleInventory();
+
+        #endregion
+
+
+        #region Public Methods
 
         // GET: api/<controller>
         [HttpGet, AllowAnonymous]
@@ -20,5 +27,7 @@ namespace TheGildedRoseApi.Controllers
             // Return all inventory items
             return _gildedRoseInventory;
         }
+
+        #endregion
     }
 }

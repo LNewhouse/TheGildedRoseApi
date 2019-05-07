@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TheGildedRoseApi.Models
+﻿namespace TheGildedRoseApi.Models
 {
     public class UserLogin
     {
-        public string Username { get; set; }
+        #region Properties
 
         public string Password { get; set; }
+
+        public string Username { get; set; }
+
+        #endregion
     }
 }

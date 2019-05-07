@@ -8,15 +8,42 @@ namespace TheGildedRoseApi.Models
     /// </summary>
     public class Transaction
     {
-        public int UserId { get; set; }
+        #region Properties
 
         public PurchaseOrder PurchaseOrder { get; set; }
 
         public DateTime TransactionTime { get; set; }
+
+        public int UserId { get; set; }
+
+        #endregion
     }
 
     public static class TransactionExtensions
     {
+        #region Public Properties
+
+        /// <summary>
+        /// Builds the Gilded Rose's sample transaction list
+        /// </summary>
+        /// <returns></returns>
+        public static List<Transaction> GenerateSampleTransactions()
+        {
+            var transactions = new List<Transaction>();
+
+            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 1, Quantity = 5 }, UserId = 1, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-10) }); //Freshly Baked Bread
+
+            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 2, Quantity = 2 }, UserId = 1, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-8) }); //Rockscale Cod
+
+            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 2, Quantity = 1 }, UserId = 4, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-6) }); //Rockscale Cod
+
+            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 4, Quantity = 15 }, UserId = 2, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-4) }); //Tough Jerky
+
+            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 6, Quantity = 20 }, UserId = 2, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-2) }); //Tropical Sunfruit
+
+            return transactions;
+        }
+
         /// <summary>
         /// Validates the given transactions
         /// </summary>
@@ -50,25 +77,6 @@ namespace TheGildedRoseApi.Models
             return isValid;
         }
 
-        /// <summary>
-        /// Builds the Gilded Rose's sample transaction list
-        /// </summary>
-        /// <returns></returns>
-        public static List<Transaction> GenerateSampleTransactions()
-        {
-            var transactions = new List<Transaction>();
-
-            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder {ItemId = 1, Quantity = 5}, UserId = 1, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-10) }); //Freshly Baked Bread
-
-            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 2, Quantity = 2}, UserId = 1, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-8) }); //Rockscale Cod
-
-            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 2, Quantity = 1}, UserId = 4, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-6) }); //Rockscale Cod
-
-            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 4, Quantity = 15}, UserId = 2, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-4) }); //Tough Jerky
-
-            transactions.Add(new Transaction { PurchaseOrder = new PurchaseOrder { ItemId = 6, Quantity = 20}, UserId = 2, TransactionTime = DateTime.Now.ToUniversalTime().AddDays(-2) }); //Tropical Sunfruit
-
-            return transactions;
-        }
+        #endregion
     }
 }
