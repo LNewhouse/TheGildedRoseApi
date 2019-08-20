@@ -20,6 +20,8 @@ namespace TheGildedRoseApi.Controllers
             _config = config;
         }
 
+        // Probably should make the successful user login find time and failed login time take similar amounts of time [Future thought]
+        // Also do something so that I'm not passing plaintext around [Future thought]
         [AllowAnonymous]
         [HttpPost]
         public IActionResult CreateToken([FromBody] UserLogin login)

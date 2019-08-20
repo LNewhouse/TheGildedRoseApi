@@ -1,4 +1,7 @@
 # TheGildedRoseApi
+
+https://gitlab.com/Jennings.Newhouse/TheGildedRoseApi
+
 API Test for the folks at EP
 
 API Requirements (Tested using Postman)

@@ -11,6 +11,9 @@ using TheGildedRoseApi.Models;
 
 namespace TheGildedRoseApi.Controllers
 {
+    /// <summary>
+    /// API for creating a transaction
+    /// </summary>
     [Route("api/[controller]")]
     public class TransactionController : Controller
     {

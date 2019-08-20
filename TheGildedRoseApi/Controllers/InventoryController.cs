@@ -20,9 +20,10 @@ namespace TheGildedRoseApi.Controllers
 
         #region Public Methods
 
+        // Wonky interactions occur when using IEnumerable on return calls in Apis [Future thought]
         // GET: api/<controller>
         [HttpGet, AllowAnonymous]
-        public IEnumerable<Item> Get()
+        public List<Item> Get()
         {
             // Return all inventory items
             return _gildedRoseInventory;

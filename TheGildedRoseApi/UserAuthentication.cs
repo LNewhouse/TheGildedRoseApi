@@ -27,7 +27,7 @@ namespace TheGildedRoseApi
                 new Claim("UserId", user.UserId.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jwt:256KeyBitKeyForTestingPurposes"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Jwt:256KeyBitKeyForTestingPurposes")); //Key can be anything, string doesn't matter
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -42,12 +42,8 @@ namespace TheGildedRoseApi
 
         public static User Authenticate(UserLogin login)
         {
-            User user = null;
-
-            if (RegisteredUsers.Any(u => u.UserLogin.Username == login.Username) && RegisteredUsers.Any(u => u.UserLogin.Password == login.Password))
-            {
-                user = RegisteredUsers.First(ru => ru.UserLogin.Username == login.Username);
-            }
+            // Case sensative
+            User user = RegisteredUsers.Where(u => u.UserLogin == login).FirstOrDefault();
 
             return user;
         }
